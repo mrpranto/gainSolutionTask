@@ -79,6 +79,50 @@ class BuilderServices
             ];
         }
 
+        if ($operator == 'is_not') {
+            return [
+                'operator' => '!=',
+                'value' => $value
+            ];
+        }
+
+        if ($operator == 'starts_with') {
+            return [
+                'operator' => 'LIKE',
+                'value' => $value.'%'
+            ];
+        }
+
+
+        if ($operator == 'ends_with') {
+            return [
+                'operator' => 'LIKE',
+                'value' =>  '%'.$value
+            ];
+        }
+
+
+        if ($operator == 'doesnot_starts_with') {
+            return [
+                'operator' => 'NOT LIKE',
+                'value' =>  $value.'%'
+            ];
+        }
+
+        if ($operator == 'doesnot_end_with') {
+            return [
+                'operator' => 'NOT LIKE',
+                'value' =>  '%'.$value
+            ];
+        }
+
+        if ($operator == 'doesnot_contains') {
+            return [
+                'operator' => 'NOT LIKE',
+                'value' =>  '%'.$value.'%'
+            ];
+        }
+
         if ($operator == 'between') {
 
             $value = explode(', ', $value);
