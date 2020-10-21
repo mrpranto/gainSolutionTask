@@ -90,7 +90,7 @@ class BuilderServices
 
         if ($operator == 'before') {
             return [
-                'operator' => '=',
+                'operator' => '<',
                 'value' => $value
             ];
         }
