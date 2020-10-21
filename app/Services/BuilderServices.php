@@ -75,7 +75,7 @@ class BuilderServices
         if ($operator == 'contains') {
             return [
                 'operator' => 'LIKE',
-                'value' => "%$value%"
+                'value' => '%'.$value.'%'
             ];
         }
 
@@ -91,6 +91,28 @@ class BuilderServices
         if ($operator == 'before') {
             return [
                 'operator' => '<',
+                'value' => $value
+            ];
+        }
+
+
+        if ($operator == 'on or before') {
+            return [
+                'operator' => '<=',
+                'value' => $value
+            ];
+        }
+
+        if ($operator == 'on or after') {
+            return [
+                'operator' => '>=',
+                'value' => $value
+            ];
+        }
+
+        if ($operator == 'after') {
+            return [
+                'operator' => '>',
                 'value' => $value
             ];
         }
