@@ -24,9 +24,20 @@ class SubscriberController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $subscribers = $this->builderServices->indexData();
+
+        $segment = Segment::query();
+
+        if ($request->filled('id')){
+
+            $segment->findOrFail($request->id);
+
+        }
+
+        $segment = $segment->firstOrFail();
+
+        $subscribers = $this->builderServices->build($segment);
 
         return view('subscriber.index', compact('subscribers'));
     }

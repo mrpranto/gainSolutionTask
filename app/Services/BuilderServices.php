@@ -6,19 +6,20 @@ namespace App\Services;
 
 use App\Models\SegmentLogic;
 use App\Models\Subscriber;
+use Illuminate\Database\Eloquent\Builder;
 
 class BuilderServices
 {
 
-    public function indexData()
+    public function build($segment)
     {
-        $batches = SegmentLogic::get(['batch', 'logic_name', 'operator', 'value'])->groupBy('batch');
+        $batches = $segment->segmentLogic->groupBy('batch');
 
         $subscribers = Subscriber::query();
 
         foreach ($batches as $batch)
         {
-            $subscribers->where(function ($builder) use ($batch){
+            $subscribers->where(function (Builder $builder) use ($batch){
 
                 foreach ($batch as $key => $logic)
                 {
